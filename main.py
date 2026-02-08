@@ -22,7 +22,6 @@ print ('Daily News — Thursday, 18 August 1977')
 
 
 date_format = ['%A, %B %d, %Y', '%A, %d.%m.%y', '%A, %d %B %Y']
-global date_index
 
 date_index = 0
 
