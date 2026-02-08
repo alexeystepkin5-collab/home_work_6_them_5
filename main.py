@@ -16,40 +16,36 @@
 
 from datetime import datetime as dt
 
-# print(dt.strptime('Wednesday, October 2, 2002', '%A, %B %d, %Y' ))
-# print(dt.strptime('Friday, 11.10.13', '%A, %d.%m.%y' ))
-# print(dt.strptime('Thursday, 18 August 1977', '%A, %d %B %Y' ))
-
 print ('The Moscow Times — Wednesday, October 2, 2002')
 print ('The Guardian — Friday, 11.10.13')
 print ('Daily News — Thursday, 18 August 1977')
 
-#date_string = ''
-#magazine_is = ''
-# трай эксепт надо засунуть в функцию и вызывать ее в случае эксепт, если это не ключ выхода.
 
-try:
-    date_string = input('Введите дату: ')
-    formated_date = dt.strptime(date_string, '%A, %B %d, %Y')
-    magazine_is = 'The Moscow Times'
-except:
-    #print('неизвестный формат даты')
+date_format = ['%A, %B %d, %Y', '%A, %d.%m.%y', '%A, %d %B %Y']
+global date_index
+
+date_index = 0
+
+def date_trial(date_string, date_format, date_index):
     try:
-        formated_date = dt.strptime(date_string, '%A, %d.%m.%y')
-        magazine_is = 'The Guardian'
+        formated_date = dt.strptime(date_string, date_format[date_index])
+        magazine_is = 'Daily News'
     except:
-        #print('неизвестный формат даты')
-        try:
-            formated_date = dt.strptime(date_string, '%A, %d %B %Y')
-            magazine_is = 'Daily News'
-        except:
-            print('неизвестный формат даты')
+        if date_index < 2:
+            date_index += 1
+            date_trial(date_string, date_format, date_index)
         else:
-            print(magazine_is)
-            print(formated_date)
+            print('неизвестный формат даты')
+            return 0
     else:
-        print(magazine_is)
+        #print(magazine_is)
         print(formated_date)
-else:
-    print (magazine_is)
-    print (formated_date)
+        return 1
+returned = 1
+while (returned):
+    date_string = input('Введите дату, для завершения введите exit: ')
+    if date_string == 'exit':
+        returned = 0
+    else:
+        date_trial(date_string, date_format, date_index)
+
