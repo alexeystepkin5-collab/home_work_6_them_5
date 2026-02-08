@@ -28,7 +28,7 @@ date_index = 0
 def date_trial(date_string, date_format, date_index):
     try:
         formated_date = dt.strptime(date_string, date_format[date_index])
-        magazine_is = 'Daily News'
+        #magazine_is = 'Daily News'
     except:
         if date_index < 2:
             date_index += 1
